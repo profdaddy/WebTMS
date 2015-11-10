@@ -18,8 +18,8 @@ ellURLFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&p
 TMS_URLS = [crtvURLWinter,edltURLWinter, ellURLWinter]
 
 # first stab at this, add a second list to scan a list of courses and just pull certain courses.
-# each entry is a dictionary with a URL as key, list of course numbers to grab as the value
-PARTIAL_TMS_URLS = [{educURLWinter: [310, 325, 525]}]
+# each entry is a list with a URL as key, list of course numbers to grab as the value
+PARTIAL_TMS_URLS = [ [educURLWinter, ['310', '325', '525']] ]
 
 # i'm a regex to get digits from the string with max and current enrollments
 DIGIT_REGEX = re.compile('\d+')
@@ -34,6 +34,7 @@ def getTableRows(url):
     try:
         html = urlopen(url)
     except HTTPError as e:
+        print "HTTPError"  + e
         return None
     try:
         bsObj = BeautifulSoup(html.read())
@@ -44,21 +45,28 @@ def getTableRows(url):
         evenrows = bsObj.findAll("tr", {"class":"even"})
         rows = oddrows + evenrows
     except AttributeError as e:
+        print "Tipped AttributeError" + e
         return None
     return rows
     
-def extractCourseInfo(tableRows, file=None):
+def extractCourseInfo(tableRows, courseNumbers=None, file=None):
     """go through a list of table rows containing <td> info for a course and extrct the important stuff"""
     courseInfo = []
     for row in tableRows:
         courseRows = row.findAll("td")
+        
+        # currently, the second TD contains the course number. 
+        # only include the course if it matches a course number we're looking for
+        if courseNumbers != None:
+            if (courseRows[1].getText().strip() in courseNumbers) == False:
+                continue
+                
         for course in courseRows:
-            
-            # is this the line with the enrollment numbers?
+             # is this the line with the enrollment numbers?
             if course.p:
                 if DIGIT_REGEX.findall(course.p.attrs["title"]):
                     maxEnrollment, enrolled = (DIGIT_REGEX.findall(course.p.attrs["title"]))
-                    print("Max Enrollment: " + maxEnrollment + " Enrolled: " + enrolled)
+                    #print("Max Enrollment: " + maxEnrollment + " Enrolled: " + enrolled)
                 else:
                     maxEnrollment, enrolled = "FULL", "FULL"
             infoText = course.getText().strip()
@@ -68,6 +76,7 @@ def extractCourseInfo(tableRows, file=None):
         if courseInfo:
             makeCourseJSON(courseInfo, maxEnrollment, enrolled)
         courseInfo = []
+    
     return courseArray
             
 def makeCourseJSON(courseInfo, maxEnrollment, currentEnrollment):
@@ -97,6 +106,7 @@ def writeJSONFooter(outFile, numberCourses):
 def crawlWebTMS(outputFileName):
     """main function to start crawling. give it an outputfileName to dump
     JSON info to"""    
+    
     outFile = open(outputFileName, 'w')
     writeJSONHeader(outFile)
     
@@ -108,6 +118,19 @@ def crawlWebTMS(outputFileName):
         else:
             tempArray = extractCourseInfo(parsedCourses).sort(key=itemgetter('courseNum'))
             print tempArray
+    
+    # LOOP on urls where you just want to pull certain courses        
+    for url_dict in PARTIAL_TMS_URLS:
+        url, course_numbers = url_dict[0], url_dict[1]
+        
+        parsedCourses = getTableRows(url)
+        
+        if parsedCourses == None:
+            print("Title not found")
+        else:
+            tempArray = extractCourseInfo(parsedCourses, courseNumbers=course_numbers).sort(key=itemgetter('courseNum'))
+            print tempArray
+                
     numberCourses = len(courseArray)
         
     outFile.write(json.dumps(courseArray, indent=2))

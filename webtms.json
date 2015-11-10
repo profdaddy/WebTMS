@@ -9,7 +9,43 @@
     "instructor": "Louise A Whitelaw", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "4"
+    "currentEnrollment": "5"
+  }, 
+  {
+    "subjectCode": "EDUC", 
+    "title": "Computer Applications in Teaching", 
+    "crn": "24903", 
+    "section": "001", 
+    "maxEnrollment": "15", 
+    "courseNum": "310", 
+    "instructor": "R", 
+    "type": "Lecture & Lab", 
+    "method": "Face To Face", 
+    "currentEnrollment": "7"
+  }, 
+  {
+    "subjectCode": "EDUC", 
+    "title": "Multimedia in Instructional Design", 
+    "crn": "23278", 
+    "section": "001", 
+    "maxEnrollment": "10", 
+    "courseNum": "325", 
+    "instructor": "R\n06:30 pm - 09:20 pm", 
+    "type": "Lecture", 
+    "method": "Face To Face", 
+    "currentEnrollment": "5"
+  }, 
+  {
+    "subjectCode": "EDUC", 
+    "title": "Multimedia in Instructional Design", 
+    "crn": "22212", 
+    "section": "900", 
+    "maxEnrollment": "30", 
+    "courseNum": "325", 
+    "instructor": "STAFF", 
+    "type": "Lecture & Lab", 
+    "method": "Online", 
+    "currentEnrollment": "1"
   }, 
   {
     "subjectCode": "CRTV", 
@@ -46,6 +82,42 @@
     "type": "Lecture", 
     "method": "Online", 
     "currentEnrollment": "3"
+  }, 
+  {
+    "subjectCode": "EDUC", 
+    "title": "Multi-Media Instructional Design", 
+    "crn": "20315", 
+    "section": "900", 
+    "maxEnrollment": "30", 
+    "courseNum": "525", 
+    "instructor": "Megan L Fritz", 
+    "type": "Lecture & Lab", 
+    "method": "Online", 
+    "currentEnrollment": "2"
+  }, 
+  {
+    "subjectCode": "EDUC", 
+    "title": "Multi-Media Instructional Design", 
+    "crn": "20203", 
+    "section": "001", 
+    "maxEnrollment": "13", 
+    "courseNum": "525", 
+    "instructor": "R", 
+    "type": "Lecture & Lab", 
+    "method": "Face To Face", 
+    "currentEnrollment": "2"
+  }, 
+  {
+    "subjectCode": "EDUC", 
+    "title": "Multi-Media Instructional Design", 
+    "crn": "20359", 
+    "section": "901", 
+    "maxEnrollment": "30", 
+    "courseNum": "525", 
+    "instructor": "STAFF", 
+    "type": "Lecture & Lab", 
+    "method": "Online", 
+    "currentEnrollment": "0"
   }, 
   {
     "subjectCode": "EDLT", 
@@ -129,7 +201,7 @@
     "instructor": "Craig Nicholas Bach", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "13"
+    "currentEnrollment": "16"
   }, 
   {
     "subjectCode": "CRTV", 
@@ -141,9 +213,9 @@
     "instructor": "David W Paredes", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "4"
+    "currentEnrollment": "5"
   }
 ],
- "queryRecordCount": 12,
- "totalRecordCount": 12
+ "queryRecordCount": 18,
+ "totalRecordCount": 18
 }
