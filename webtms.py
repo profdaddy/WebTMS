@@ -25,7 +25,7 @@ PARTIAL_TMS_URLS = [ [educURLWinter, ['310', '325', '525']] ]
 DIGIT_REGEX = re.compile('\d+')
 
 # column headings from WebTMS
-COURSE_KEYS = ['subjectCode', 'courseNum', 'type', 'method', 'section', 'crn', 'title', 'instructor']
+COURSE_KEYS = ['subjectCode', 'courseNum', 'type', 'method', 'section', 'crn', 'title', 'days/time', 'days', 'time', 'instructor']
 
 courseArray = []
 
@@ -45,7 +45,7 @@ def getTableRows(url):
         evenrows = bsObj.findAll("tr", {"class":"even"})
         rows = oddrows + evenrows
     except AttributeError as e:
-        print "Tipped AttributeError" + e
+        print "Tripped AttributeError" + e
         return None
     return rows
     
@@ -70,10 +70,14 @@ def extractCourseInfo(tableRows, courseNumbers=None, file=None):
                 else:
                     maxEnrollment, enrolled = "FULL", "FULL"
             infoText = course.getText().strip()
-            if infoText != '' and not "TBD" in infoText:
+            #if infoText != '' and not "TBD" in infoText:
+            # Let's take everything vs. stripping entires with TBD
+            if infoText != '':
                 courseInfo.append(infoText)
-        
-        if courseInfo:
+
+        # if you have all the courseinfo, process to JSON
+        if len(courseInfo) == len(COURSE_KEYS):
+            print(courseInfo)
             makeCourseJSON(courseInfo, maxEnrollment, enrolled)
         courseInfo = []
     
