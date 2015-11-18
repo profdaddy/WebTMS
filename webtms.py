@@ -3,7 +3,7 @@ from urllib import urlopen
 from urllib2 import HTTPError
 import json
 import re
-from operator import itemgetter
+from operator import itemgetter, attrgetter
 
 
 edltURLWinter = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDUyNToJHhmXlAaYXA0sQiEG1oqmtoBgCbhSKKpgAAAA%3D%3D&sp=ST&sp=SEDLT&sp=14'
@@ -120,7 +120,7 @@ def crawlWebTMS(outputFileName):
         if parsedCourses == None:
             print ("Title not found")
         else:
-            tempArray = extractCourseInfo(parsedCourses).sort(key=itemgetter('courseNum'))
+            tempArray = extractCourseInfo(parsedCourses)
             print tempArray
     
     # LOOP on urls where you just want to pull certain courses        
@@ -132,12 +132,15 @@ def crawlWebTMS(outputFileName):
         if parsedCourses == None:
             print("Title not found")
         else:
-            tempArray = extractCourseInfo(parsedCourses, courseNumbers=course_numbers).sort(key=itemgetter('courseNum'))
+            tempArray = extractCourseInfo(parsedCourses, courseNumbers=course_numbers)
             print tempArray
                 
     numberCourses = len(courseArray)
+
+    # sort the array of course objects by subject and course number
+    sortedArray = sorted(courseArray, key=itemgetter('subjectCode', 'courseNum'))
         
-    outFile.write(json.dumps(courseArray, indent=2))
+    outFile.write(json.dumps(sortedArray, indent=2))
         
     writeJSONFooter(outFile, numberCourses)
     
