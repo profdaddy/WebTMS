@@ -60,6 +60,8 @@ def extractCourseInfo(tableRows, courseNumbers=None, file=None):
         if courseNumbers != None:
             if (courseRows[1].getText().strip() in courseNumbers) == False:
                 continue
+            else:
+                print("Looking at course number " + courseRows[1].getText().strip())
                 
         for course in courseRows:
              # is this the line with the enrollment numbers?
@@ -76,7 +78,7 @@ def extractCourseInfo(tableRows, courseNumbers=None, file=None):
                 courseInfo.append(infoText)
 
         # if you have all the courseinfo, process to JSON
-        if len(courseInfo) == len(COURSE_KEYS):
+        if courseInfo[0] != 'TBD':
             print(courseInfo)
             makeCourseJSON(courseInfo, maxEnrollment, enrolled)
         courseInfo = []
