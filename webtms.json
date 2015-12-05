@@ -12,7 +12,7 @@
     "instructor": "Louise A Whitelaw", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "6"
+    "currentEnrollment": "8"
   }, 
   {
     "subjectCode": "CRTV", 
@@ -27,7 +27,7 @@
     "instructor": "Lawrence J Keiser", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "10"
+    "currentEnrollment": "13"
   }, 
   {
     "subjectCode": "CRTV", 
@@ -42,7 +42,7 @@
     "instructor": "Fredricka K Reisman", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "9"
+    "currentEnrollment": "14"
   }, 
   {
     "subjectCode": "CRTV", 
@@ -50,14 +50,14 @@
     "crn": "22478", 
     "section": "900", 
     "days": "TBD", 
-    "maxEnrollment": "20", 
+    "maxEnrollment": "30", 
     "days/time": "TBD\nTBD", 
     "time": "TBD", 
     "courseNum": "620", 
     "instructor": "Craig Nicholas Bach", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "18"
+    "currentEnrollment": "25"
   }, 
   {
     "subjectCode": "CRTV", 
@@ -72,7 +72,7 @@
     "instructor": "David W Paredes", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "8"
+    "currentEnrollment": "10"
   }, 
   {
     "subjectCode": "EDLT", 
@@ -87,7 +87,7 @@
     "instructor": "Brian K Smith", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "2"
+    "currentEnrollment": "8"
   }, 
   {
     "subjectCode": "EDLT", 
@@ -117,7 +117,7 @@
     "instructor": "Elizabeth L Haslam", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "4"
+    "currentEnrollment": "6"
   }, 
   {
     "subjectCode": "EDLT", 
@@ -132,7 +132,7 @@
     "instructor": "Elizabeth L Haslam", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "4"
+    "currentEnrollment": "6"
   }, 
   {
     "subjectCode": "EDLT", 
@@ -147,24 +147,10 @@
     "instructor": "Aroutis N Foster", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "5"
+    "currentEnrollment": "9"
   }, 
   {
-    "subjectCode": "EDLT", 
-    "title": "Integrating Games & Pedagogical Content Knowledge", 
-    "crn": "26835", 
-    "section": "900", 
-    "days": "TBD", 
-    "maxEnrollment": "25", 
-    "days/time": "TBD\nTBD", 
-    "time": "TBD", 
-    "courseNum": "544", 
-    "instructor": "Aroutis N Foster", 
-    "type": "Lecture", 
-    "method": "Online", 
-    "currentEnrollment": "0"
-  }, 
-  {
+    "lab_time": "TBD", 
     "subjectCode": "EDUC", 
     "title": "Computer Applications in Teaching", 
     "crn": "24903", 
@@ -174,10 +160,11 @@
     "days/time": "R\n06:30 pm - 09:20 pm\n\nTBD\nTBD", 
     "time": "06:30 pm - 09:20 pm", 
     "courseNum": "310", 
-    "instructor": "TBD", 
+    "lab_days": "TBD", 
+    "instructor": "Brian K Smith", 
     "type": "Lecture & Lab", 
     "method": "Face To Face", 
-    "currentEnrollment": "8"
+    "currentEnrollment": "10"
   }, 
   {
     "subjectCode": "EDUC", 
@@ -189,7 +176,7 @@
     "days/time": "R\n06:30 pm - 09:20 pm", 
     "time": "06:30 pm - 09:20 pm", 
     "courseNum": "325", 
-    "instructor": "STAFF", 
+    "instructor": "Aroutis N Foster", 
     "type": "Lecture", 
     "method": "Face To Face", 
     "currentEnrollment": "8"
@@ -207,7 +194,24 @@
     "instructor": "STAFF", 
     "type": "Lecture & Lab", 
     "method": "Online", 
-    "currentEnrollment": "4"
+    "currentEnrollment": "5"
+  }, 
+  {
+    "lab_time": "TBD", 
+    "subjectCode": "EDUC", 
+    "title": "Multi-Media Instructional Design", 
+    "crn": "20203", 
+    "section": "001", 
+    "days": "R", 
+    "maxEnrollment": "13", 
+    "days/time": "R\n06:30 pm - 09:20 pm\n\nTBD\nTBD", 
+    "time": "06:30 pm - 09:20 pm", 
+    "courseNum": "525", 
+    "lab_days": "TBD", 
+    "instructor": "Aroutis N Foster", 
+    "type": "Lecture & Lab", 
+    "method": "Face To Face", 
+    "currentEnrollment": "3"
   }, 
   {
     "subjectCode": "EDUC", 
@@ -222,37 +226,7 @@
     "instructor": "Megan L Fritz", 
     "type": "Lecture & Lab", 
     "method": "Online", 
-    "currentEnrollment": "4"
-  }, 
-  {
-    "subjectCode": "EDUC", 
-    "title": "Multi-Media Instructional Design", 
-    "crn": "20203", 
-    "section": "001", 
-    "days": "R", 
-    "maxEnrollment": "13", 
-    "days/time": "R\n06:30 pm - 09:20 pm\n\nTBD\nTBD", 
-    "time": "06:30 pm - 09:20 pm", 
-    "courseNum": "525", 
-    "instructor": "TBD", 
-    "type": "Lecture & Lab", 
-    "method": "Face To Face", 
-    "currentEnrollment": "2"
-  }, 
-  {
-    "subjectCode": "EDUC", 
-    "title": "Multi-Media Instructional Design", 
-    "crn": "20359", 
-    "section": "901", 
-    "days": "TBD", 
-    "maxEnrollment": "30", 
-    "days/time": "TBD\nTBD", 
-    "time": "TBD", 
-    "courseNum": "525", 
-    "instructor": "STAFF", 
-    "type": "Lecture & Lab", 
-    "method": "Online", 
-    "currentEnrollment": "0"
+    "currentEnrollment": "8"
   }, 
   {
     "subjectCode": "ELL", 
@@ -267,24 +241,9 @@
     "instructor": "William F Lynch", 
     "type": "Lecture", 
     "method": "Online", 
-    "currentEnrollment": "5"
-  }, 
-  {
-    "subjectCode": "ELL", 
-    "title": "Design & Delivery of E-Learning II", 
-    "crn": "22854", 
-    "section": "900", 
-    "days": "TBD", 
-    "maxEnrollment": "20", 
-    "days/time": "TBD\nTBD", 
-    "time": "TBD", 
-    "courseNum": "605", 
-    "instructor": "Mamta P Shah", 
-    "type": "Lecture", 
-    "method": "Online", 
-    "currentEnrollment": "0"
+    "currentEnrollment": "9"
   }
 ],
- "queryRecordCount": 19,
- "totalRecordCount": 19
+ "queryRecordCount": 16,
+ "totalRecordCount": 16
 }

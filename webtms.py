@@ -27,6 +27,11 @@ DIGIT_REGEX = re.compile('\d+')
 # column headings from WebTMS
 COURSE_KEYS = ['subjectCode', 'courseNum', 'type', 'method', 'section', 'crn', 'title', 'days/time', 'days', 'time', 'instructor']
 
+# some courses have labs. those have an additional two columns for the lab days and time. adjust for that with this
+# list of course headings
+COURSE_WITH_LAB_KEYS = ['subjectCode', 'courseNum', 'type', 'method', 'section', 'crn', 'title', 'days/time', 'days', 'time', 'lab_days', 'lab_time', 'instructor']
+
+
 courseArray = []
 
 def getTableRows(url):
@@ -89,7 +94,15 @@ def makeCourseJSON(courseInfo, maxEnrollment, currentEnrollment):
     """take the scraped list of course info and make into a dictionary. Append that dict onto a courseArray 
         that'll eventually get written out as JSON"""
     jsonDictionary = {}
-    for (key, val) in zip(COURSE_KEYS, courseInfo):
+
+    my_keys = []
+    if len(courseInfo) == len(COURSE_KEYS):
+        my_keys = COURSE_KEYS
+    else:
+        my_keys = COURSE_WITH_LAB_KEYS
+
+
+    for (key, val) in zip(my_keys, courseInfo):
         jsonDictionary[key] = val
     
     # add the enrollment numbers
