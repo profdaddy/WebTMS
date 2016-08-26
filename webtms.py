@@ -1,25 +1,24 @@
 from bs4 import BeautifulSoup
 from urllib import urlopen
+#from urllib.error import HTTPError
 from urllib2 import HTTPError
 import json
 import re
 from operator import itemgetter, attrgetter
+from jsonUpload import JSONUpload
 
 
-edltURLWinter = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDUyNToJHhmXlAaYXA0sQiEG1oqmtoBgCbhSKKpgAAAA%3D%3D&sp=ST&sp=SEDLT&sp=14'
-crtvURLWinter = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDUyNToJHhmXlAaYXA0sQiEG1oqmtoBgCbhSKKpgAAAA%3D%3D&sp=ST&sp=SCRTV&sp=14'
-ellURLWinter = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDUyNToJHhmXlAaYXA0sQiEG1oqmtoBgCbhSKKpgAAAA%3D%3D&sp=ST&sp=SELL&sp=14'
-educURLWinter ='https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDUyNToJHhmXlAaYXA0sQiEG1oqmtoBgCbhSKKpgAAAA%3D%3D&sp=ST&sp=SEDUC&sp=14'
+edltURLFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDM0NToAa3xJwchcDSxCKgIgVDM11DcwD9ZmnspAAAAA%3D%3D&sp=ST&sp=SEDLT&sp=15'
+crtvURLFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDM0NToAa3xJwchcDSxCKgIgVDM11DcwD9ZmnspAAAAA%3D%3D&sp=ST&sp=SCRTV&sp=15'
+ellURLFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDM0NToAa3xJwchcDSxCKgIgVDM11DcwD9ZmnspAAAAA%3D%3D&sp=ST&sp=SELL&sp=15'
+aeodFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDM0NToAa3xJwchcDSxCKgIgVDM11DcwD9ZmnspAAAAA%3D%3D&sp=ST&sp=SEHRD&sp=15'
+educURLFall ='https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAAFvzloG1uIhBPjWlVC%2BlKLUiNUcvs6hErzw1qSS3WC8lsSRRLyS1KJcBAhiZGJh9GNgTk0tCMnNTSxhEfLISyxL1iwtz9EECxSWJuQXWPgwcJUAtzvkpQBVCEBU5iXnp%2BsElRZl56TB5l9Ti5EKGOgamioKCEgY2IwNDM0NToAa3xJwchcDSxCKgIgVDM11DcwD9ZmnspAAAAA%3D%3D&sp=ST&sp=SEDUC&sp=15'
 
-edltURLFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAADWLOw7CMBAFlyA%2BNaInF8DGSKGhBFGlQeQCS7yKguzg2BtIxYm4GnfAKOKV82beH5gEDyvSndCeejKi9iyedGUbhEZGUZC3MGyUwDiHGZZc1JYYlvkNHyhDa%2BQPBEbr9jnMOSaHu47GYjAMNpW8sK%2Bb6v8fKZQtvCDpnWOYbjcqU1kMTmhMeu7QRylV2Vrtvq1QxdGkAAAA&sp=ST&sp=SEDLT&sp=14'
-crtvURLFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAADWLOw7CMBAFlyA%2BNaInF8DGSKGhBFGlQeQCS7yKguzg2BtIxYm4GnfAKOKV82beH5gEDyvSndCeejKi9iyedGUbhEZGUZC3MGyUwDiHGZZc1JYYlvkNHyhDa%2BQPBEbr9jnMOSaHu47GYjAMNpW8sK%2Bb6v8fKZQtvCDpnWOYbjcqU1kMTmhMeu7QRylV2Vrtvq1QxdGkAAAA&sp=ST&sp=SCRTV&sp=14'
-ellURLFall = 'https://duapp2.drexel.edu/webtms_du/app?component=subjectDetails&page=CollegesSubjects&service=direct&sp=ZH4sIAAAAAAAAADWLOw7CMBAFlyA%2BNaInF8DGSKGhBFGlQeQCS7yKguzg2BtIxYm4GnfAKOKV82beH5gEDyvSndCeejKi9iyedGUbhEZGUZC3MGyUwDiHGZZc1JYYlvkNHyhDa%2BQPBEbr9jnMOSaHu47GYjAMNpW8sK%2Bb6v8fKZQtvCDpnWOYbjcqU1kMTmhMeu7QRylV2Vrtvq1QxdGkAAAA&sp=ST&sp=SELL&sp=14'
-
-TMS_URLS = [crtvURLWinter,edltURLWinter, ellURLWinter]
+TMS_URLS = [crtvURLFall, edltURLFall, ellURLFall, aeodFall]
 
 # first stab at this, add a second list to scan a list of courses and just pull certain courses.
 # each entry is a list with a URL as key, list of course numbers to grab as the value
-PARTIAL_TMS_URLS = [ [educURLWinter, ['310', '325', '525']] ]
+PARTIAL_TMS_URLS = [] # [ [educURLFall, ['325', '525']] ]
 
 # i'm a regex to get digits from the string with max and current enrollments
 DIGIT_REGEX = re.compile('\d+')
@@ -39,7 +38,7 @@ def getTableRows(url):
     try:
         html = urlopen(url)
     except HTTPError as e:
-        print "HTTPError"  + e
+        print("HTTPError"  + e)
         return None
     try:
         bsObj = BeautifulSoup(html.read())
@@ -50,7 +49,7 @@ def getTableRows(url):
         evenrows = bsObj.findAll("tr", {"class":"even"})
         rows = oddrows + evenrows
     except AttributeError as e:
-        print "Tripped AttributeError" + e
+        print("Tripped AttributeError" + e)
         return None
     return rows
     
@@ -62,8 +61,8 @@ def extractCourseInfo(tableRows, courseNumbers=None, file=None):
         
         # currently, the second TD contains the course number. 
         # only include the course if it matches a course number we're looking for
-        if courseNumbers != None:
-            if (courseRows[1].getText().strip() in courseNumbers) == False:
+        if courseNumbers is not None:
+            if not courseRows[1].getText().strip() in courseNumbers):
                 continue
             else:
                 print("Looking at course number " + courseRows[1].getText().strip())
@@ -132,11 +131,11 @@ def crawlWebTMS(outputFileName):
     for url in TMS_URLS:
         parsedCourses = getTableRows(url)
         
-        if parsedCourses == None:
-            print ("Title not found")
+        if parsedCourses is None:
+            print("Title not found")
         else:
             tempArray = extractCourseInfo(parsedCourses)
-            print tempArray
+            print(tempArray)
     
     # LOOP on urls where you just want to pull certain courses        
     for url_dict in PARTIAL_TMS_URLS:
@@ -144,11 +143,11 @@ def crawlWebTMS(outputFileName):
         
         parsedCourses = getTableRows(url)
         
-        if parsedCourses == None:
+        if parsedCourses is None:
             print("Title not found")
         else:
             tempArray = extractCourseInfo(parsedCourses, courseNumbers=course_numbers)
-            print tempArray
+            print(tempArray)
                 
     numberCourses = len(courseArray)
 
@@ -158,6 +157,9 @@ def crawlWebTMS(outputFileName):
     outFile.write(json.dumps(sortedArray, indent=2))
         
     writeJSONFooter(outFile, numberCourses)
-    
+    outFile.close()
+
+    uploader = JSONUpload(outputFileName)
+    uploader.upload()
     
 crawlWebTMS('./webtms.json')
